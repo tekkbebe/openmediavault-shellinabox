@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+   ########################################################################
+   #  Update the configuration.
+   #   <config>
+   #      <services>
+   #         <shellinabox>
+   #            <enable>0</enable>
+   #            <linkify>none</linkify>
+   #            <enablebeep>0</enablebeep>
+   #            <enabletermsettings>0</enabletermsettings>
+   #            <fontfamily>Courier New</fontfamily>
+   #            <fontsize>14</fontsize>
+   #         </shellinabox>
+   #      </services>
+   #   </config>
+   ########################################################################
+
+   if ! omv_config_exists "/config/services/shellinabox"; then
+      echo "Initialize configuration"
+      object="<enable>0</enable>"
+      object="${object}<linkify>none</linkify>"
+      object="${object}<enablebeep>0</enablebeep>"
+      object="${object}<enabletermsettings>0</enabletermsettings>"
+      object="${object}<fontfamily>Courier New</fontfamily>"
+      object="${object}<fontsize>14</fontsize>"
+      omv_config_add_element "/config/services" "shellinabox" "${object}" true
+   fi
