@@ -102,10 +102,8 @@ Ext.define("OMV.module.admin.service.shellinabox.Settings", {
                 handler    : function () {
                     var link = '/shellinabox';
                     window.open(link, '_blank');
-                }
-            },{
-                border     : false,
-                html       : "</p>"
+                },
+                margin     : "0 0 5 0"
             }]
         },{
             xtype         : "fieldset",
