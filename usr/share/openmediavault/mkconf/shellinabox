@@ -44,8 +44,8 @@ xmlstarlet sel -t -m "//services/shellinabox" \
   -o "SHELLINABOX_PORT=4200" -n \
   -o "SHELLINABOX_ARGS=\"--disable-ssl-menu --service=/:SSH " \
   -i "enablebeep[. = '0']" -o "--no-beep " -b \
-  -i "string-length(linkify) > 0" -v "concat('--linkify=', linkify, ' ')" -b \
-  -i "enabletermsettings[. = '1']" -o "--css=${OMV_SHELL_TERMCSS} " -b \
+  -i "string-length(linkify) > 0" -v "concat('--linkify=', linkify)" -b \
+  -i "enabletermsettings[. = '1']" -o " --css=${OMV_SHELL_TERMCSS}" -b \
   -o "\"" ${OMV_CONFIG_FILE} | xmlstarlet unesc > ${OMV_SHELL_DEFAULT}
 
 cat <<EOF > "${OMV_SHELL_NGINX}"
@@ -61,6 +61,6 @@ xmlstarlet sel -t -m "//services/shellinabox" \
   -i "string-length(fontfamily) > 0" -v "concat('    font-family: \"', fontfamily, '\";')" -n -b \
   -i "fontsize > 0" -v "concat('    font-size: ', fontsize, 'px;')" -n -b \
   -o "}" ${OMV_CONFIG_FILE} | xmlstarlet unesc > ${OMV_SHELL_TERMCSS}
-  
+
 nginx -s reload
 
