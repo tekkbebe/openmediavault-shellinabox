@@ -97,7 +97,7 @@ Ext.define("OMV.module.admin.service.shellinabox.Settings", {
             },{
                 xtype      : "button",
                 name       : "shellmanage",
-                text       : _("Shell Web Client"),
+                text       : _("Web Client"),
                 scope      : this,
                 handler    : function () {
                     var link = '/shellinabox';
