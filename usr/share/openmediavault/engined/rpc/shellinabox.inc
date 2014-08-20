@@ -20,10 +20,9 @@
  */
 require_once("openmediavault/object.inc");
 require_once("openmediavault/error.inc");
-require_once("openmediavault/functions.inc");
+require_once("openmediavault/config.inc");
 require_once("openmediavault/rpcservice.inc");
 require_once("openmediavault/notify.inc");
-require_once("openmediavault/module.inc");
 
 class OMVRpcServiceShellinabox extends OMVRpcServiceAbstract
 {
@@ -56,9 +55,10 @@ class OMVRpcServiceShellinabox extends OMVRpcServiceAbstract
         global $xmlConfig;
 
         // Validate the RPC caller context.
-        $this->validateMethodContext($context, array(
-            "role" => OMV_ROLE_ADMINISTRATOR
-        ));
+        $this->validateMethodContext(
+            $context,
+            array( "role" => OMV_ROLE_ADMINISTRATOR )
+        );
 
         // Get the configuration object.
         $object = $xmlConfig->get($this->getXPath());
@@ -71,10 +71,10 @@ class OMVRpcServiceShellinabox extends OMVRpcServiceAbstract
         }
 
         // Modify the result object.
-        $object['enable'] = boolval($object['enable']);
-        $object['enablebeep'] = boolval($object['enablebeep']);
+        $object['enable']             = boolval($object['enable']);
+        $object['enablebeep']         = boolval($object['enablebeep']);
         $object['enabletermsettings'] = boolval($object['enabletermsettings']);
-        $object['fontsize'] = intval($object['fontsize']);
+        $object['fontsize']           = intval($object['fontsize']);
 
         return $object;
     }
@@ -112,7 +112,7 @@ class OMVRpcServiceShellinabox extends OMVRpcServiceAbstract
             "enablebeep"         => array_boolval($params, 'enablebeep'),
             "enabletermsettings" => array_boolval($params, 'enabletermsettings'),
             "fontfamily"         => $params['fontfamily'],
-            "fontsize"           => $params['fontsize']
+            "fontsize"           => $params['fontsize'],
         );
 
         // Set the configuration object.
