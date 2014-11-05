@@ -65,7 +65,7 @@ Ext.define("OMV.module.admin.service.shellinabox.Settings", {
         items.push({
             id       : me.getId() + "-shellmanage",
             xtype    : "button",
-            text     : _("Shell"),
+            text     : _("Web Client"),
             icon     : "images/shellinabox.png",
             iconCls  : Ext.baseCSSPrefix + "btn-icon-16x16",
             disabled : true,
