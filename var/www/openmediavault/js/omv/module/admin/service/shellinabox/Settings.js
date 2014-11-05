@@ -49,8 +49,33 @@ Ext.define("OMV.module.admin.service.shellinabox.Settings", {
                 "!allowBlank",
                 "!readOnly"
             ]
-         }]
+         },{
+            conditions : [
+                { name : "enable", value : true }
+            ],
+            properties : function(valid, field) {
+                this.setButtonDisabled("shellmanage", !valid);
+            }  
+        }]
     }],
+
+    getButtonItems : function() {
+        var me = this;
+        var items = me.callParent(arguments);
+        items.push({
+            id       : me.getId() + "-shellmanage",
+            xtype    : "button",
+            text     : _("Shell"),
+            icon     : "images/shellinabox.png",
+            iconCls  : Ext.baseCSSPrefix + "btn-icon-16x16",
+            disabled : true,
+            scope    : me,
+            handler  : function () {
+                window.open('/shellinabox', '_blank');
+            }
+        });
+        return items;
+    },
 
     getFormItems : function() {
         var me = this;
@@ -94,16 +119,6 @@ Ext.define("OMV.module.admin.service.shellinabox.Settings", {
                 fieldLabel : _("Beep"),
                 boxLabel   : _("Enable sound on BEL character"),
                 checked    : false
-            },{
-                xtype      : "button",
-                name       : "shellmanage",
-                text       : _("Web Client"),
-                scope      : this,
-                handler    : function () {
-                    var link = '/shellinabox';
-                    window.open(link, '_blank');
-                },
-                margin     : "0 0 5 0"
             }]
         },{
             xtype         : "fieldset",
