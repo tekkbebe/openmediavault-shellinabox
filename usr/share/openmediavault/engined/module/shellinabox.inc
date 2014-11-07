@@ -19,10 +19,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once("openmediavault/module.inc");
 require_once("openmediavault/config.inc");
 require_once("openmediavault/error.inc");
 require_once("openmediavault/initscript.inc");
-require_once("openmediavault/module.inc");
 
 class OMVModuleShellinabox extends OMVModuleServiceAbstract implements
     OMVINotifyListener, 
@@ -51,7 +51,7 @@ class OMVModuleShellinabox extends OMVModuleServiceAbstract implements
 
     public function applyConfig()
     {
-        $cmd = "omv-mkconf shellinabox 2>&1";
+        $cmd = sprintf("omv-mkconf %s 2>&1", $this->getName());
 
         if(0 !== $this->exec($cmd, $output)) {
             throw new OMVException(
@@ -64,7 +64,7 @@ class OMVModuleShellinabox extends OMVModuleServiceAbstract implements
 
     public function stopService()
     {
-        $initd = new OMVSysVInitScript($this->getName(), false);
+        $initd = new OMVSysVInitScript($this->getName());
         $initd->exec();
     }
 
@@ -81,7 +81,7 @@ class OMVModuleShellinabox extends OMVModuleServiceAbstract implements
             );
         }
 
-        if (!boolval($object["enable"])) {
+        if (!boolval($object["enble"])) {
             return;
         }
 
